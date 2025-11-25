@@ -6,9 +6,12 @@ import z from "zod";
 import type { ZodTypeProvider } from "fastify-type-provider-zod";
 
 
-export default async function userRoute(app: FastifyInstance) {
-   app.withTypeProvider<ZodTypeProvider>().post("/user/create", {
+export default async function leadsRoute(app: FastifyInstance) {
+   app.withTypeProvider<ZodTypeProvider>().post("/leads", {
       schema: {
+         summary: "Create Lead",
+         tags: ["Leads"],
+         description: "Create a new lead",
          body: z.object({
             name: z.string(),
             age: z.number()
