@@ -2,7 +2,7 @@ import { Worker } from "bullmq";
 import { env } from "../env";
 
 new Worker(
-   "leads enqueue",
+   "leads-enqueue",
    async job => {
       console.log("Processando job:", job.id, job.data);
    },
