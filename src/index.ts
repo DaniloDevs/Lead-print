@@ -1,10 +1,9 @@
 import Fastify from "fastify";
 import Swagger from "@fastify/swagger";
 import ScalarSwagger from "@scalar/fastify-api-reference";
-import jobsRoute from "./routes/jobs";
 import { serializerCompiler, validatorCompiler } from 'fastify-type-provider-zod';
-import leadsRoute from "./routes/leads";
 import { serverAdapter } from "./connections/bull-board";
+import SetupRoutes from "./routes/setup-routes";
 
 const app = Fastify();
 
@@ -33,7 +32,6 @@ app.register(ScalarSwagger, {
 });
 
 
-app.register(jobsRoute)
-app.register(leadsRoute)
+app.register(SetupRoutes)
 
 export { app }
