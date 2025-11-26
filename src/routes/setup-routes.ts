@@ -4,6 +4,7 @@ import FetchCompletedJobs from "./jobs/fetch-completed-job";
 import FetchFailedJobs from "./jobs/fetch-failed-jobs";
 import FetchWaitingJobs from "./jobs/fetch-waiting-jobs";
 import CreateLeads from "./leads/create-lead";
+import PrinterRoutes from "./printer-routes";
 
 
 export default async function SetupRoutes(app: FastifyInstance) {
@@ -13,7 +14,10 @@ export default async function SetupRoutes(app: FastifyInstance) {
    app.register(FetchFailedJobs)
    app.register(FetchWaitingJobs)
    
-   
+
    // Create Lead
    app.register(CreateLeads)
+
+   // Printers
+   app.register(PrinterRoutes)
 }

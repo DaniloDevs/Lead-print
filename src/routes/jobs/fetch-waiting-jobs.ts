@@ -13,7 +13,7 @@ export default async function FetchWaitingJobs(app: FastifyInstance) {
             description: "Fetch all jobs in status is waiting for current event",
             tags: ['Jobs']
          }
-      }, async (request, reply) => {
+      }, async (_, reply) => {
          const jobsWaiting = await queue.getWaiting()
 
          return reply.status(200).send({ jobs: jobsWaiting })
