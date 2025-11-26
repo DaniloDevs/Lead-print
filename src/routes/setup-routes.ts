@@ -4,7 +4,10 @@ import FetchCompletedJobs from "./jobs/fetch-completed-job";
 import FetchFailedJobs from "./jobs/fetch-failed-jobs";
 import FetchWaitingJobs from "./jobs/fetch-waiting-jobs";
 import CreateLeads from "./leads/create-lead";
-import PrinterRoutes from "./printer-routes";
+import { DetectPrinter } from "./printer/detect-printer";
+import { GetPrintStatus } from "./printer/get-print-status";
+import { TestPrintDevice } from "./printer/test-print-device";
+import { ConfigurePrintDevice } from "./printer/configure-print";
 
 
 export default async function SetupRoutes(app: FastifyInstance) {
@@ -19,5 +22,8 @@ export default async function SetupRoutes(app: FastifyInstance) {
    app.register(CreateLeads)
 
    // Printers
-   app.register(PrinterRoutes)
+   app.register(DetectPrinter)
+   app.register(GetPrintStatus)
+   app.register(TestPrintDevice)
+   app.register(ConfigurePrintDevice)
 }
