@@ -1,7 +1,7 @@
 import type { FastifyInstance } from 'fastify';
 import type { ZodTypeProvider } from 'fastify-type-provider-zod';
 import z from 'zod';
-import { queue } from '../../jobs/queue';
+import { queue } from '../../connections/queue';
 
 
 export default async function DeleteAllJobsByType(app: FastifyInstance) {

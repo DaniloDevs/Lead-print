@@ -2,7 +2,7 @@ import z from "zod";
 
 
 export const leadSchema = z.object({
-   event: z.string(),
+   eventId: z.string(),
    name: z.string(),
    age: z.number(),
    cellphone: z.string()

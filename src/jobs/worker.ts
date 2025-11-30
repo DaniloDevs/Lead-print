@@ -43,7 +43,6 @@ new Worker(
       printer.println(new Date().toLocaleString('pt-BR'))
       printer.cut()
 
-
       await printer.execute();
       console.log("Executed Job")
 

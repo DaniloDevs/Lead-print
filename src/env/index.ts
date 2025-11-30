@@ -7,6 +7,7 @@ dotenv.config()
 const envSchema = z.object({
 	PORT: z.coerce.number().default(3333),
 	REDIS_PORT: z.coerce.number().default(6379),
+	REDIS_HOST: z.string(),
 	DATABASE_URL: z.string()
 });
 

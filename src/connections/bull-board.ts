@@ -1,7 +1,7 @@
 import { BullMQAdapter } from "@bull-board/api/bullMQAdapter";
 import { createBullBoard } from "@bull-board/api";
 import { FastifyAdapter } from "@bull-board/fastify";
-import { queue } from "../jobs/queue";
+import { queue } from "./queue";
 
 
 
