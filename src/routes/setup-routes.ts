@@ -9,6 +9,7 @@ import { GetPrintStatus } from "./printer/get-print-status";
 import { TestPrintDevice } from "./printer/test-print-device";
 import { ConfigurePrintDevice } from "./printer/configure-print";
 import DeleteAllJobsByType from "./jobs/delete-all-jobs-by-type";
+import EventsRoutes from "./events-routes";
 
 
 export default async function SetupRoutes(app: FastifyInstance) {
@@ -28,4 +29,7 @@ export default async function SetupRoutes(app: FastifyInstance) {
    app.register(GetPrintStatus)
    app.register(TestPrintDevice)
    app.register(ConfigurePrintDevice)
+
+   // Events
+   app.register(EventsRoutes)
 }

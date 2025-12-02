@@ -8,7 +8,10 @@ const envSchema = z.object({
 	PORT: z.coerce.number().default(3333),
 	REDIS_PORT: z.coerce.number().default(6379),
 	REDIS_HOST: z.string(),
-	DATABASE_URL: z.string()
+	DATABASE_URL: z.string(),
+	MINIO_ACCESS_KEY: z.string(),
+	MINIO_SECRET_KEY: z.string(),
+	MINIO_ENDPOINT: z.string(),
 });
 
 const _env = envSchema.safeParse(process.env);

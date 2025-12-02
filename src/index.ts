@@ -4,6 +4,7 @@ import ScalarSwagger from "@scalar/fastify-api-reference";
 import { jsonSchemaTransform, serializerCompiler, validatorCompiler } from 'fastify-type-provider-zod';
 import { serverAdapter } from "./connections/bull-board";
 import SetupRoutes from "./routes/setup-routes";
+import Multipart from "@fastify/multipart"
 
 const app = Fastify();
 
@@ -15,6 +16,8 @@ app.register(serverAdapter.registerPlugin(), {
 // Add schema validator and serializer
 app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
+
+app.register(Multipart);
 
 app.register(Swagger, {
    openapi: {

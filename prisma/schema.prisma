@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model events {
+  id        String   @id @default(cuid())
+  title     String
+  slug      String   @unique
+  active    Boolean
+  createdAt DateTime
+  bannerURL String?
+
+  leads leads[]
+}
+
+model leads {
+  id        String @id @default(cuid())
+  name      String
+  cellphone String @unique
+
+  events   events? @relation(fields: [eventsId], references: [id])
+  eventsId String?
+}
