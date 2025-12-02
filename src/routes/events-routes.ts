@@ -5,6 +5,7 @@ import { prisma } from "../connections/prisma";
 import { createSlug } from "../utils/create-slug";
 import { s3 } from "../connections/minio";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
+import { env } from "../env";
 
 export default function EventsRoutes(app: FastifyInstance) {
    app
@@ -100,7 +101,7 @@ export default function EventsRoutes(app: FastifyInstance) {
          );
 
          // URL pública depende da sua política de bucket
-         const publicUrl = `${process.env.MINIO_PUBLIC_URL}/${filename}`;
+         const publicUrl = `${env.MINIO_BUCKET}/${filename}`;
 
          await prisma.events.update({
             where: { id },

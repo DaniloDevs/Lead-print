@@ -1,12 +1,41 @@
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { Worker, type Job } from "bullmq";
 import { env } from "../env";
 import { getPrinter } from "../utils/setup-printer";
-import type { Lead } from "../types/lead";
-import path from "path";
 import type { ThermalPrinter } from "node-thermal-printer";
+import { s3 } from '../connections/minio';
+import { GetObjectCommand } from '@aws-sdk/client-s3';
+import type { Ticket } from '../types/ticket';
+
+import fs from "fs";
+import path from "path";
+import axios from "axios";
+
+async function downloadImage(url: string) {
+   const response = await axios.get(url, { responseType: "arraybuffer" });
+   const buffer = Buffer.from(response.data);
+
+   return buffer;
+}
 
 
-async function TempleteTickt(printer: ThermalPrinter, job: Job<Lead>) {
+async function TempleteTickt(printer: ThermalPrinter, job: Job<Ticket>) {
+   const [bucket, key] = job.data.bannerURL.split('/')
+
+   const presignedUrl = await getSignedUrl(
+      s3,
+      new GetObjectCommand({
+         Bucket: bucket,
+         Key: key,
+      }),
+      { expiresIn: 3600 }
+   );
+
+   const localPath = await downloadImage(presignedUrl);
+
+   printer.alignCenter()
+   await printer.printImageBuffer(localPath);
+
    // Titulo 
    printer.alignCenter();
    printer.setTextNormal()
@@ -34,10 +63,10 @@ async function TempleteTickt(printer: ThermalPrinter, job: Job<Lead>) {
 
 new Worker(
    "leads-enqueue",
-   async (job: Job<Lead>) => {
+   async (job: Job<Ticket>) => {
       const printer = getPrinter();
 
-      await TempleteTickt(printer,job)
+      await TempleteTickt(printer, job)
 
       await printer.execute();
       console.log("Executed Job")
