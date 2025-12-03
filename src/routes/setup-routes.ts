@@ -16,6 +16,7 @@ import ListCompletedJobs from "./jobs/list-completed-job";
 import ListFailedJobs from "./jobs/list-failed-jobs";
 import ListActivatedJobs from "./jobs/list-activated-jobs";
 import { ExportEventLeads } from "./events/export-event-leads";
+import { MetricsRoutes } from "./metrics-routes";
 
 
 export default async function SetupRoutes(app: FastifyInstance) {
@@ -43,4 +44,7 @@ export default async function SetupRoutes(app: FastifyInstance) {
    app.register(UpdateEventBanner)
    app.register(UpdateEventStatus)
    app.register(ExportEventLeads)
+
+   // Metrics
+   app.register(MetricsRoutes)
 }
