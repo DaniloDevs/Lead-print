@@ -6,9 +6,6 @@ import type { ThermalPrinter } from "node-thermal-printer";
 import { s3 } from '../connections/minio';
 import { GetObjectCommand } from '@aws-sdk/client-s3';
 import type { Ticket } from '../types/ticket';
-
-import fs from "fs";
-import path from "path";
 import axios from "axios";
 
 async function downloadImage(url: string) {

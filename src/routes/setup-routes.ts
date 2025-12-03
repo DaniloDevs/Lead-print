@@ -15,6 +15,7 @@ import ListhWaitingJobs from "./jobs/list-waiting-jobs";
 import ListCompletedJobs from "./jobs/list-completed-job";
 import ListFailedJobs from "./jobs/list-failed-jobs";
 import ListActivatedJobs from "./jobs/list-activated-jobs";
+import { ExportEventLeads } from "./events/export-event-leads";
 
 
 export default async function SetupRoutes(app: FastifyInstance) {
@@ -41,4 +42,5 @@ export default async function SetupRoutes(app: FastifyInstance) {
    app.register(ListEventsBySlug)
    app.register(UpdateEventBanner)
    app.register(UpdateEventStatus)
+   app.register(ExportEventLeads)
 }

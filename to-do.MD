@@ -5,8 +5,8 @@
 * [x] `GET /events/:slug` (buscar por slug)
 * [x] `POST /events` (criar evento)
 * [x] `PATCH /events/:id/status` (ativar/desativar)
-* [ ] `GET /events/:id/leads` (listar leads do evento)
-* [ ] `GET /events/:id/export/leads.csv` (exportar leads do evento)
+* [x] `GET /events/:id/leads` (listar leads do evento)
+* [x] `GET /events/:id/export/leads.csv` (exportar leads do evento)
 
 # **Leads**
 
