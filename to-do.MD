@@ -12,8 +12,6 @@
 
 * [ ] `GET /leads` (listar com filtros)
 * [x] `POST /leads` (criar lead vinculado ao evento)
-* [ ] `GET /leads/:id` (detalhar lead)
-* [ ] `DELETE /leads/:id` (remover lead)
 * [ ] `GET /leads/export/all.csv` (exportar todos os leads)
 
 

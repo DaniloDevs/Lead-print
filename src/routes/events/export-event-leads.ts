@@ -18,19 +18,25 @@ export async function ExportEventLeads(app: FastifyInstance) {
       }, async (request, reply) => {
          const { id } = request.params;
 
-         const event = await prisma.events.findUnique({
-            where: { id },
-            include: { leads: true },
-         });
+         const [events, leads] = await Promise.all([
+            prisma.events.findUnique({ where: { id } }),
+            prisma.leads.findMany({
+               where: {
+                  eventsId: id,
+                  isValid: true
+               },
+               select: { id: true, name: true, cellphone: true }
+            }),
+         ]);
 
-         if (!event) {
+         if (!events) {
             return reply.status(404).send({ message: "Event not found" });
          }
 
          // Montar CSV corretamente
          const header = "id,name,cellphone\n";
 
-         const rows = event.leads
+         const rows = leads
             .map((lead) => `${lead.id},${lead.name},${lead.cellphone}`)
             .join("\n");
 
@@ -39,7 +45,7 @@ export async function ExportEventLeads(app: FastifyInstance) {
          reply.header("Content-Type", "text/csv");
          reply.header(
             "Content-Disposition",
-            `attachment; filename="${event.slug}-leads.csv"`
+            `attachment; filename="${events.slug}-leads.csv"`
          );
 
          return reply.send(csv);

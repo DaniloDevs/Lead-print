@@ -25,7 +25,7 @@ export default async function CreateLeads(app: FastifyInstance) {
             }
          }
       }, async (request, reply) => {
-         const { name, cellphone, eventsId } = request.body
+         const { name, cellphone, eventsId,isValid } = request.body
 
          const event = await prisma.events.findUnique({
             where: { id: eventsId },
@@ -40,12 +40,13 @@ export default async function CreateLeads(app: FastifyInstance) {
             data: {
                name,
                cellphone,
-               eventsId
+               eventsId,
+               isValid
             }
          })
 
          // Salvar user 
-         const job = await queue.add("capture lead", {
+         await queue.add("capture lead", {
             name,
             cellphone,
             bannerURL: event?.bannerURL!

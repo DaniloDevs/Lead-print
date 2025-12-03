@@ -19,9 +19,10 @@ model events {
 }
 
 model leads {
-  id        String @id @default(cuid())
+  id        String  @id @default(cuid())
   name      String
-  cellphone String @unique
+  cellphone String  @unique
+  isValid   Boolean @default(true)
 
   events   events @relation(fields: [eventsId], references: [id])
   eventsId String

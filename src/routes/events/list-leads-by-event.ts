@@ -30,29 +30,30 @@ export async function ListLeadsByEvent(app: FastifyInstance) {
       }, async (request, reply) => {
          const { id } = request.params
 
-         const events = await prisma.events.findUnique({
-            where: { id },
-            select: {
-               _count: {
-                  select: {
-                     leads: true
-                  }
+         const [events, leads, count] = await Promise.all([
+            prisma.events.findUnique({ where: { id } }),
+            prisma.leads.findMany({
+               where: {
+                  eventsId: id,
+                  isValid: true
                },
-               leads: {
-                  select: {
-                     name: true,
-                     cellphone: true
-                  }
+               select: { name: true, cellphone: true }
+            }),
+            prisma.leads.count({
+               where: {
+                  eventsId: id,
+                  isValid: true
                }
-            }
-         })
+            })
+         ]);
 
-         if(!events) return reply.status(400).send({message: "Events not exist!"})
-         
+
+         if (!events) return reply.status(400).send({ message: "Events not exist!" })
+
 
          return reply.code(200).send({
-            currentLeads: events?._count.leads,
-            leads: events?.leads,
+            currentLeads: count,
+            leads: leads,
          });
       });
 }
