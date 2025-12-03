@@ -4,14 +4,14 @@ import { queue } from '../../connections/queue';
 
 
 
-export default async function FetchWaitingJobs(app: FastifyInstance) {
+export default async function ListhWaitingJobs(app: FastifyInstance) {
    app
       .withTypeProvider<ZodTypeProvider>()
       .get("/jobs/waiting", {
          schema: {
-            summary: "Fetch Waiting jobs",
-            description: "Fetch all jobs in status is waiting for current event",
-            tags: ['Jobs']
+            summary: "List pending background jobs",
+            tags: ['Jobs'],
+            description: "Retrieves the backlog of jobs currently in the 'waiting' state. These tasks are queued and pending execution, awaiting availability from a worker node or a scheduled execution time.",
          }
       }, async (_, reply) => {
          const jobsWaiting = await queue.getWaiting()
