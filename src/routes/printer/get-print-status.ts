@@ -1,15 +1,27 @@
 import type { FastifyInstance } from "fastify"
 import type { ZodTypeProvider } from 'fastify-type-provider-zod';
 import { getPrinter } from "../../utils/setup-printer";
+import z from "zod";
 
 export async function GetPrintStatus(app: FastifyInstance) {
    app
       .withTypeProvider<ZodTypeProvider>()
       .get('/printer/status', {
          schema: {
-            summary: "Get Print Device Status",
+            summary: "Check printer connectivity",
             tags: ["Printer"],
-            description: "Get the status of a printing device.",
+            description: "Performs a heartbeat check on the currently configured printer interface to verify if the device is reachable. This endpoint is lightweight and suitable for periodic polling to update UI status indicators.",
+            response: {
+               200: z.object({
+                  connected: z.boolean()
+               }),
+
+               500: z.object({
+                  error: z.string(),
+                  message: z.string(),
+                  tip: z.string().optional().describe("Actionable command-line suggestions to fix permission issues (e.g., Linux `chmod` or `usermod` commands).")
+               })
+            }
          }
       }, async (_, reply) => {
          try {
