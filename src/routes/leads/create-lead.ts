@@ -4,6 +4,7 @@ import { queue } from "../../connections/queue";
 import { leadSchema } from "../../types/lead";
 import { prisma } from "../../connections/prisma";
 import z from "zod";
+import dayjs from "dayjs";
 
 
 export default async function CreateLeads(app: FastifyInstance) {
@@ -41,7 +42,8 @@ export default async function CreateLeads(app: FastifyInstance) {
                name,
                cellphone,
                eventsId,
-               isValid
+               isValid,
+               createdAt: dayjs().format("DD/MM/YYYY")
             }
          })
 

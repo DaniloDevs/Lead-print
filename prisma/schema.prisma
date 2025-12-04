@@ -12,7 +12,7 @@ model events {
   title     String
   slug      String   @unique
   active    Boolean
-  createdAt DateTime @default(now())
+  createdAt DateTime
   bannerURL String?
 
   leads leads[]
@@ -23,7 +23,7 @@ model leads {
   name      String
   cellphone String  @unique
   isValid   Boolean @default(true)
-  createdAt DateTime @default(now())
+  createdAt DateTime
 
   events   events @relation(fields: [eventsId], references: [id])
   eventsId String

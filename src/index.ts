@@ -5,6 +5,7 @@ import { jsonSchemaTransform, serializerCompiler, validatorCompiler } from 'fast
 import { serverAdapter } from "./connections/bull-board";
 import SetupRoutes from "./routes/setup-routes";
 import Multipart from "@fastify/multipart"
+import { env } from "./env";
 
 const app = Fastify();
 
@@ -35,11 +36,18 @@ Esta API gerencia o fluxo completo de eventos presenciais, desde o cadastro de p
          `,
          version: "1.0.0",
       },
+      servers: [
+         {
+            url: `http://localhost:${env.PORT}`,
+            description: 'Ambiente de Desenvolvimento (Local)'
+         },
+      ],
       tags: [
          { name: 'Events', description: 'Gerenciamento do ciclo de vida dos eventos e configurações globais.' },
-         { name: 'Leads', description: 'Cadastro e consulta de participantes captados.' },
-         { name: 'Printer', description: 'Integração direta com hardware, diagnóstico e comandos de impressão ESC/POS.' },
-         { name: 'Jobs', description: 'Monitoramento de filas de processamento em segundo plano (BullMQ).' },
+         { name: 'Leads', description: 'Cadastro e consulta de participantes captados e validação de funil.' },
+         { name: 'Printer', description: 'Integração direta com hardware, diagnóstico de conexão e comandos de impressão.' },
+         { name: 'Jobs', description: 'Observabilidade das filas de processamento (Active, Waiting, Failed, Completed).' },
+         { name: 'Metrics', description: 'Dashboards analíticos e KPIs de performance dos eventos.' },
       ]
    },
    transform: jsonSchemaTransform,
@@ -49,7 +57,7 @@ app.register(fastifyScalar, {
    routePrefix: "/docs",
    configuration: {
       searchHotKey: 'k',
-      theme: 'deepSpace', 
+      theme: 'deepSpace',
       layout: 'modern',
    }
 });

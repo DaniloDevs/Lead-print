@@ -10,23 +10,14 @@ import { ListLeadsByEvent } from "./events/list-leads-by-event";
 import ListEventsBySlug from "./events/list-events-by-slug";
 import { UpdateEventBanner } from "./events/update-event-banner";
 import { UpdateEventStatus } from "./events/update-event-status";
-import DeleteAllJobsByType from "./jobs/delete-all-jobs-by-type";
-import ListhWaitingJobs from "./jobs/list-waiting-jobs";
-import ListCompletedJobs from "./jobs/list-completed-job";
-import ListFailedJobs from "./jobs/list-failed-jobs";
-import ListActivatedJobs from "./jobs/list-activated-jobs";
 import { ExportEventLeads } from "./events/export-event-leads";
-import { MetricsRoutes } from "./metrics-routes";
+import { DailyMetrics } from "./metrics/daily-metrics";
+import { EventMetrics } from "./metrics/event-metrics";
+import { OverviewMetrics } from "./metrics/overview";
+import { EventRankings } from "./metrics/event-rankings";
 
 
 export default async function SetupRoutes(app: FastifyInstance) {
-   // Jobs
-   app.register(DeleteAllJobsByType)
-   app.register(ListhWaitingJobs)
-   app.register(ListCompletedJobs)
-   app.register(ListFailedJobs)
-   app.register(ListActivatedJobs)
-
    // Create Lead
    app.register(CreateLeads)
 
@@ -46,5 +37,8 @@ export default async function SetupRoutes(app: FastifyInstance) {
    app.register(ExportEventLeads)
 
    // Metrics
-   app.register(MetricsRoutes)
+   app.register(DailyMetrics)
+   app.register(EventMetrics)
+   app.register(EventRankings)
+   app.register(OverviewMetrics)
 }

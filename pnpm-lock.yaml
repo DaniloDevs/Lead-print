@@ -44,6 +44,9 @@ importers:
       bullmq:
         specifier: ^5.64.1
         version: 5.64.1
+      dayjs:
+        specifier: 1.11.19
+        version: 1.11.19
       dotenv:
         specifier: ^17.2.3
         version: 17.2.3
@@ -1051,6 +1054,9 @@ packages:
 
   dank-do-while@0.1.2:
     resolution: {integrity: sha512-pyMrgXfugjvdernLCcXNixYqGijUZzYxrb+hAeED2EBpNbctCCxdA/O6NIQXn6vIjwzY1IMmV29d2Y6vaayrwQ==}
+
+  dayjs@1.11.19:
+    resolution: {integrity: sha512-t5EcLVS6QPBNqM2z8fakk/NKel+Xzshgt8FFKAn+qwlD1pzZWxh0nVCrvFK7ZDb6XucZeF9z8C7CBWTRIVApAw==}
 
   debug@4.4.3:
     resolution: {integrity: sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==}
@@ -3297,6 +3303,8 @@ snapshots:
   csstype@3.2.3: {}
 
   dank-do-while@0.1.2: {}
+
+  dayjs@1.11.19: {}
 
   debug@4.4.3:
     dependencies:

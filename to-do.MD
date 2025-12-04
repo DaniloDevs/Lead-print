@@ -17,8 +17,17 @@
 
 # **Metrics**
 
-* [ ] `GET /metrics/overview` (visão geral)
-* [ ] `GET /metrics/events/:id` (métricas por evento)
-* [ ] `GET /metrics/events/:id/funnel` (funil do evento)
-* [ ] `GET /metrics/daily` (crescimento diário)
-* [ ] `GET /metrics/events-ranking` (ranking de eventos por leads)
+* [x] `GET /metrics/overview` (visão geral)
+* [x] `GET /metrics/events/:id` (métricas por evento)
+* [x] `GET /metrics/events/:id/funnel` (funil do evento)
+* [x] `GET /metrics/daily` (crescimento diário)
+* [x] `GET /metrics/events-ranking` (ranking de eventos por leads)
+
+
+# **Jobs**
+
+* [ ] Criar rota admin: `GET /jobs/queues` (listar filas e status)
+* [ ] Criar rota admin: `GET /jobs/queues/:name` (detalhes de uma fila)
+* [ ] Criar rota admin: `POST /jobs/queues/:name/retry` (reprocessar jobs falhos)
+* [ ] Criar rota admin: `DELETE /jobs/queues/:name/clean` (limpar jobs concluídos/falhos)
+

@@ -3,6 +3,7 @@ import type { ZodTypeProvider } from 'fastify-type-provider-zod';
 import z from "zod";
 import { prisma } from "../../connections/prisma";
 import { createSlug } from "../../utils/create-slug";
+import dayjs from "dayjs";
 
 export async function CreateEvent(app: FastifyInstance) {
    app
@@ -31,7 +32,7 @@ export async function CreateEvent(app: FastifyInstance) {
                title,
                slug: createSlug(title),
                active,
-               createdAt: new Date()
+               createdAt: dayjs().format("DD/MM/YYYY")
             }
          });
 
